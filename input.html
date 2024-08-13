@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Select Boxes with jQuery</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <form id="dynamicForm">
+        <!-- Select Box 1: Template Type -->
+        <label for="templateType">Template Type:</label>
+        <select id="templateType" name="templateType">
+            <option value="">Select Template Type</option>
+            <option value="type1">Type 1</option>
+            <option value="type2">Type 2</option>
+            <option value="type3">Type 3</option>
+        </select>
+
+        <!-- Select Box 2: Display On -->
+        <label for="displayOn" style="display:none;">Display On:</label>
+        <select id="displayOn" name="displayOn" style="display:none;">
+            <option value="">Select Display On</option>
+            <option value="display1">Display 1</option>
+            <option value="display2">Display 2</option>
+            <option value="display3">Display 3</option>
+        </select>
+
+        <!-- Select Box 3: User Role -->
+        <label for="userRole" style="display:none;">User Role:</label>
+        <select id="userRole" name="userRole" style="display:none;">
+            <option value="">Select User Role</option>
+            <option value="admin">Admin</option>
+            <option value="editor">Editor</option>
+            <option value="viewer">Viewer</option>
+        </select>
+
+        <!-- Final Input -->
+        <input type="text" id="finalInput" name="finalInput" readonly style="display:none;"/>
+    </form>
+
+    <script>
+        $(document).ready(function() {
+            $('#templateType').on('change', function() {
+                if ($(this).val() !== "") {
+                    $('#displayOn').show();
+                    $('#displayOn').prev('label').show();
+                } else {
+                    $('#displayOn, #displayOn').prev('label').hide();
+                    $('#userRole, #userRole').prev('label').hide();
+                    $('#finalInput').hide();
+                }
+            });
+
+            $('#displayOn').on('change', function() {
+                if ($(this).val() !== "") {
+                    $('#userRole').show();
+                    $('#userRole').prev('label').show();
+                } else {
+                    $('#userRole, #userRole').prev('label').hide();
+                    $('#finalInput').hide();
+                }
+            });
+
+            $('#userRole').on('change', function() {
+                if ($(this).val() !== "") {
+                    $('#finalInput').show();
+                    $('#finalInput').val(`Template Type: ${$('#templateType').val()}, Display On: ${$('#displayOn').val()}, User Role: ${$(this).val()}`);
+                } else {
+                    $('#finalInput').hide();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+.glossymm-template-select {
+    display: flex;
+    gap: 10px;
+}
+
+.glossymm-select-field label {
+    font-size: 16px;
+    font-weight: 500;
+    margin-right: 10px;
+}
+.glossymm-select-field select {
+    min-width: 150px;
+}
+
+div#glossymm-target-location-select {
+    display: none;
+}
+
+div#glossymm-target-user-select {
+    display: none;
+}
